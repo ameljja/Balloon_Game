@@ -1,7 +1,8 @@
 :root {
+    --background: rgb(101, 186, 212);
     --dark: #000;
     --light: #fff;
-    --accent: #e62887;
+    --accent: #f7277e;
 }
 
 * {
@@ -13,18 +14,19 @@
 body {
     font-family: 'Righteous', cursive;
     height: 100vh;
+    width: 100vw;
     overflow: hidden;
-    background: linear-gradient(to right, var(--dark) 50%, var(--light) 50%);
+    background: linear-gradient(to right, var(--background) 50%, var(--light) 50%);
 }
 
 h1 {
     position: absolute;
     bottom: 1rem;
-    left: 50%;
+    left: 51.5%;
     transform: translate(-50%, 0);
-    font-size: 3rem;
+    font-size: 3.2rem;
     letter-spacing: 0;
-    animation: spaceout 0.3s 0.75s cubiz-bezier(0.35, -0.75, 0.55, 2) forwards;
+    animation: spaceout 0.3s 0.75s cubic-bezier(0.35, -0.75, 0.55, 2) forwards;
 }
 
 @keyframes spaceout {
@@ -36,10 +38,98 @@ h1 {
 h1:before {
     position: absolute;
     content: "";
-    left: 50%;
+    left: 45%;
     top: 50%;
     transform: translate(-50%, -50%);
-    width: 50px;
-    height: 50px;
+    width: 44px;
+    height: 44px;
     background-size: 100%;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M 50 0 a 50 45 0 0 1 50 45 a 50 50 0 0 1 -50 50 a 50 50 0 0 1 -50 -50 a 50 45 0 0 1 50 -45" fill="%23FF1EAD" /><path d="M 50 94 a 6 6 0 0 1 6 6 h -12 a 6 6 0 0 1 6 -6" fill="%23FF1EAD" /><path d="M 50 5 a 40 40 0 0 1 40 40 a 5 5 0 0 1 -5 5 a 40 40 0 0 0 -40 -40 a 5 5 0 0 1 5 -5" fill="%23fff" opacity="0.3" /></svg>');
+    animation: pop 0.2s 0.6s ease-out forwards;
+}
+
+@keyframes pop {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    99% {
+        transform: translate(-50%, -50%) scale(1.1);
+        opacity: 1;
+        visibility: 1;
+    }
+    100% {
+        opacity: 0;
+        visibility: 0;
+    }
+}
+
+h1 span:not(:nth-of-type(1)) {
+    color: var(--light);
+}
+
+h1 span:not(:nth-of-type(2)) {
+    color: var(--light);
+}
+
+h2 {
+    color: var(--accent);
+    position: absolute;
+    opacity: 0;
+    visibility: 0;
+    transition: opacity 0.2s ease-out;
+}
+
+#pink {
+    color: var(--background);
+}
+
+svg#score {
+    width: 70px;
+    height: 70px;
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+}
+
+svg#score text {
+    font-family: 'Righteous', cursive;
+    font-size: 1.7rem;
+}
+
+svg.balloon {
+    transform: translate(-50%, -50%) scale(0);
+}
+
+
+/* scaling the balloon */
+
+@keyframes appear {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+    }
+    20%,
+    90% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(0);
+    }
+}
+
+
+/* centring the SVG making up the score */
+
+@keyframes showScore {
+    to {
+        right: 47%;
+        bottom: 50%;
+        transform: translate(50%, 0) scale(3.5);
+    }
+}
+
+@keyframes highlightScore {
+    50% {
+        visibility: hidden;
+        opacity: 0;
+    }
 }
